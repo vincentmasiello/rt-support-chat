@@ -9,8 +9,11 @@
   "author": "Vincent Masiello <vincentmasiello@gmail.com>",
   "license": "MIT",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-preset-react": "^6.24.1",
     "react": "^15.6.1",
+    "react-dom": "^15.6.1",
     "webpack": "^3.5.5"
   },
   "dependencies": {
