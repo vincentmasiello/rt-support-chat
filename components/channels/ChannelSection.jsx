@@ -5,17 +5,16 @@ import ChannelForm from './ChannelForm.jsx'
 class ChannelSection extends Component {
 	render() {
 		return (
-			//can't return sibling components, only a single component
-			//wrap them in something
-
-			/* {...this.props}
-			 * ~spread operator~
-			 * Babel does this. copies the parents properties to the component. neat!
-			 */
-			<div>
+			<div className='support panel panel-primary'>
+				<div className='panel-heading'>
+					<strong>Channels</strong>
+				</div>
+				<div className='panel-body channels'>
 				<ChannelList {...this.props} />
 				<ChannelForm {...this.props} />
 			</div>
+			</div>
+			
 		)
 	}
 }
@@ -23,7 +22,8 @@ class ChannelSection extends Component {
 ChannelSection.propTypes = {
 	channels: React.PropTypes.array.isRequired,
 	setChannel: React.PropTypes.func.isRequired,
-	addChannel: React.PropTypes.func.isRequired
+	addChannel: React.PropTypes.func.isRequired,
+	activeChannel: React.PropTypes.object.isRequired
 }
 
 export default ChannelSection

@@ -5,16 +5,20 @@ class ChannelForm extends Component {
 		e.preventDefault();
 		const node = this.refs.channel;
 		const channelName = node.value;
-		this.props.addChannel(channelName);
+		this.props.addChannel(channelName); 
 		node.value = '';
 	}
 	render() {
 		return (
 			<form onSubmit={this.onSubmit.bind(this)}>
-				<input
-					type='text'
-					ref='channel'
-				/>
+				<div className='form-group'>
+					<input
+						className='form-control'
+						placeholder='Add Channel'
+						type='text'
+						ref='channel'
+					/>
+				</div>
 			</form>
 		)
 	}
