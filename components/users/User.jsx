@@ -22,7 +22,7 @@ class User extends Component {
 User.propTypes = {
 	user: React.PropTypes.object.isRequired,
 	setUser: React.PropTypes.func.isRequired,
-	activeUser: React.PropTypes.func.isRequired
+	activeUser: React.PropTypes.object.isRequired
 }
 
 export default User
