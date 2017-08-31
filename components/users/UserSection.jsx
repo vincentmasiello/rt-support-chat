@@ -9,7 +9,7 @@ class UserSection extends Component {
 				<div className='panel-heading'>
 					<strong>Users</strong>
 				</div>
-				<div>
+				<div className='panel-body users'>
 					<UserList {...this.props} />
 					<UserForm {...this.props} />
 				</div>

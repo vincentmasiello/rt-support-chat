@@ -9,7 +9,7 @@ class UserForm extends Component {
 		node.value = '';
 	}
 	render() {
-		return(
+		return (
 			<form onSubmit={this.onSubmit.bind(this)}>
 				<div className='form-group'>
 					<input

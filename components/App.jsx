@@ -65,7 +65,6 @@ class App extends Component {
 						addChannel={this.addChannel.bind(this)}
 						setChannel={this.setChannel.bind(this)}
 					/>
-					<br />
 					<UserSection
 						{...this.state}
 						addUser={this.addUser.bind(this)}
