@@ -10,11 +10,10 @@ class ChannelSection extends Component {
 					<strong>Channels</strong>
 				</div>
 				<div className='panel-body channels'>
-				<ChannelList {...this.props} />
-				<ChannelForm {...this.props} />
+					<ChannelList {...this.props} />
+					<ChannelForm {...this.props} />
+				</div>
 			</div>
-			</div>
-			
 		)
 	}
 }
