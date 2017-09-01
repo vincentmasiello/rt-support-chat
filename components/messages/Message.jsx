@@ -9,8 +9,8 @@ class Message extends Component {
 		// own messages.
 		return (
 			<li>
-				<strong>{message.author}&nbsp;&nbsp;&nbsp;</strong>
-				<span>{message.name}</span>
+				<strong>{message.author.name}</strong>
+				<span>{message.message}</span>
 			</li>
 		)
 	}

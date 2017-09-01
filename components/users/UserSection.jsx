@@ -4,7 +4,7 @@ import UserForm from './UserForm.jsx';
 
 class UserSection extends Component {
 	render() {
-		return(
+		return (
 			<div className='support panel panel-primary'>
 				<div className='panel-heading'>
 					<strong>Users</strong>
