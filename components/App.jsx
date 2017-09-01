@@ -68,7 +68,8 @@ class App extends Component {
 	 */
 	addMessage(message) {
 		let {messages} = this.state;
-		messages.push({id: messages.length, author: this.state.activeUser, message});
+		let timestamp = Date.now();
+		messages.push({id: messages.length, author: this.state.activeUser, message, timestamp});
 		this.setState({messages});
 		// TODO: send message to server
 	}
