@@ -26,9 +26,12 @@ class App extends Component {
 		// TODO: send this to server
 	}
 	setChannel(activeChannel) {
-		this.setState({activeChannel});
+		if (this.state.activeChannel !== activeChannel) {
+			this.setState({messages: []});
+			this.setState({activeChannel});
+		}
 		// TODO: send message to server "{user} Joined channel {channel} @ Date.now()"
-		// TODO: Get Channel's Messages from server (clear old messages)
+		// TODO: Get Channel's Messages from server 
 	}
 
 	addUser(name) {
