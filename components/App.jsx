@@ -12,18 +12,49 @@ class App extends Component {
 			messages: [],
 		};
 	}
+	/*
+	 * componentDidMount() 
+	 * React lifecycle event
+	 * called ONCE after render()
+	 * the app is ready to receive event messages
+	 */
+	componentDidMount() {
+		// create new websocket
+		// **this.ws assigns ws as an attribute of the app component**
+		let ws = this.ws = new WebSocket('ws://echo.websocket.org');
+
+		//set up event handlers for messages received from server
+		
+	}
+	
+	/* 
+	 * newChannel(obj channel)
+	 * 'new channel' message received from server
+	 */
+	newChannel(channel) {
+		let {channels} = this.state;
+		channels.push(channel);
+		this.setState({channels});
+	}
+
+	/*
+	 * addChannel(string name)
+	 * user submitted a new channel from ChannelForm
+	 */
 	addChannel(name) {
 		let {channels} = this.state;
 
 		// TODO: validate unique channelName
-		const newChannel = {id: channels.length, name};
-		
-		if (channels.length == 0)
-			this.setChannel(newChannel);
-
-		channels.push(newChannel);
-		this.setState({channels});
 		// TODO: send this to server
+
+		let msg = {
+			name: 'channel add',
+			data: {
+				id: channels.length,
+				name
+			}
+		}
+		this.ws.send(JSON.stringify(msg));
 	}
 	setChannel(activeChannel) {
 		if (this.state.activeChannel !== activeChannel) {
