@@ -17,10 +17,10 @@ class Message extends Component {
 		});
 
 		return (
-			<li>
-				<strong>{message.author.name}</strong><br />
-				<span>{message.message}</span><br />
-				<small>{msgDate}</small>
+			<li className='message'>
+				<strong className='author'>{message.author.name}</strong>
+				<small className='timestamp'>{msgDate}</small><br />
+				<span className='body'>{message.message}</span>
 			</li>
 		)
 	}

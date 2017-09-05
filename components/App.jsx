@@ -70,9 +70,10 @@ class App extends Component {
 	 * addMessage 
 	 */
 	addMessage(message) {
-		let {messages} = this.state;
+		let {messages, UserSectio} = this.state;
 		let timestamp = Date.now();
-		messages.push({id: messages.length, author: this.state.activeUser, message, timestamp});
+		let author = users.length > 0 ? users[0].name : 'anon';
+		messages.push({id: messages.length, author, message, timestamp});
 		this.setState({messages});
 		// TODO: send message to server
 	}
@@ -90,11 +91,11 @@ class App extends Component {
 						addUser={this.addUser.bind(this)}
 						setUser={this.setUser.bind(this)}
 					/>
-					<MessageSection
-						{...this.state}
-						addMessage={this.addMessage.bind(this)}
-					/>
 				</div>
+				<MessageSection
+					{...this.state}
+					addMessage={this.addMessage.bind(this)}
+				/>
 			</div>
 		)
 	}

@@ -7,7 +7,7 @@ class MessageSection extends Component {
 		const {activeChannel} = this.props;
 		const heading = (activeChannel != null) ? activeChannel.name : 'No Channel Selected';
 		return (
-			<div className='support panel panel-primary'>
+			<div className='messages-container panel panel-default'>
 				<div className='panel-heading'>
 					<strong>{heading}</strong>
 				</div>

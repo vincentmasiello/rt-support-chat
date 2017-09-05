@@ -26,7 +26,7 @@
 .channels, .users{
   height: 88%;
 }
-.messages{
+.messages {
   height: 94%;
 }
 .channels > ul, .messages > ul, .users > ul{
