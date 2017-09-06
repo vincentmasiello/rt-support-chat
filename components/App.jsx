@@ -120,7 +120,7 @@ class App extends Component {
 	setUser(name) {
 		socket.emit('user edit', {name});
 	}
-
+	
 	/*
 	 * addMessage 
 	 * client entered a new message, send to server through 
