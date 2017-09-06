@@ -13,6 +13,7 @@ class App extends Component {
 			messages: [],
 		};
 	}
+
 	/*
 	 * componentDidMount() 
 	 * React lifecycle event
@@ -21,6 +22,8 @@ class App extends Component {
 	 */
 	componentDidMount() {
 		let socket = this.socket = new Socket();
+
+		/* set the event handlers */
 		socket.on('connect', this.onConnect.bind(this));
 		socket.on('disconnect', this.onDisconnect.bind(this));
 		socket.on('channel add', this.onAddChannel.bind(this));
@@ -28,6 +31,19 @@ class App extends Component {
 		socket.on('user edit', this.onEditUser.bind(this));
 		socket.on('user remove', this.onRemoveUser.bind(this));
 		socket.on('message add', this.onAddMessage.bind(this));
+	}
+
+	/********************************
+	 * incoming message callbacks 
+	 ********************************/
+
+	onConnect() {
+		this.setState({connected: true});
+		this.socket.emit('channel subscribe');
+		this.socket.emit('user subscribe');
+	}
+	onDisconnect() {
+		this.setState({connected: false});
 	}
 	onAddMessage(message) {
 		let {messagses} = this.state;
@@ -41,7 +57,13 @@ class App extends Component {
 	}
 	onEditUser(editUser) {
 		let {users} = this.state;
-		users = users.map(user => {
+
+		/* .map()
+		 * on each user in the array, if that user id is same id as
+		 * the one that changed, return that new one in place of the
+		 * old one.
+		 */
+			users = users.map(user => {
 			if (editUser.id === user.id) {
 				return editUser;
 			}
@@ -56,20 +78,15 @@ class App extends Component {
 		});
 		this.setState({users});
 	}
-
-	/* connection event handlers */
-	onConnect() {
-		this.setState({connected: true});
-	}
-	onDisconnect() {
-		this.setState({connected: false});
-	}
-
 	onAddChannel(channel) {
 		let {channels} = this.state;
 		channels.push(channel);
 		this.setState({channels});
 	}
+
+	/********************************
+	 * outgoing message functions 
+	 ********************************/
 
 	/*
 	 * addChannel(string name)
@@ -79,36 +96,42 @@ class App extends Component {
 		this.socket.emit('channel add', {name});
 	}
 
+	/* 
+	 * setChannel(channel activeChannel)
+	 * user clicked a channel name, set activeChannel in state,
+	 * unsubscribe from old channel, clear old messages, subscribe
+	 * to new channel
+	 */
 	setChannel(activeChannel) {
-		if (this.state.activeChannel !== activeChannel) {
-			this.setState({messages: []});
-			this.setState({activeChannel});
-		}
-		// TODO: send message to server "{user} Joined channel {channel} @ Date.now()"
-		// TODO: Get Channel's Messages from server 
+		this.setState({activeChannel});
+		this.socket.emit('message unsubsribe');
+		this.setState({messages: []});
+		this.socket.emit('message subscribe', 
+			{channelId: activeChannel.id}); 
 	}
 
-	addUser(name) {
-		let {users} = this.state;
-		//TODO: validate unique username
-		const newUser = {id: users.length, name};
-		users.push(newUser);
-		this.setState({users});
-		this.setState({activeUser: newUser});
-		// TODO: send to server
-	}
-	setUser(activeUser) {
+	/*
+	 * setUser(string name)
+	 * use socket utility to message server that a new name has 
+	 * been entered or existing name has been edited.
+	 * //TODO: handle situation where the user actually wants to 
+	 * edit their already entered name. 
+	 */
+	setUser(name) {
 		socket.emit('user edit', {name});
 	}
 
 	/*
 	 * addMessage 
+	 * client entered a new message, send to server through 
+	 * socket utility
 	 */
 	addMessage(message) {
 		let {activeChannel} = this.state;
 		this.socket.emit('message add',
 			{channelId: activeChannel.id, body});
 	}
+
 	render() {
 		return (
 			<div className='app'>
@@ -120,8 +143,7 @@ class App extends Component {
 					/>
 					<UserSection
 						{...this.state}
-						addUser={this.addUser.bind(this)}
-						setUser={this.setUser.bind(this)}
+						setUserUser={this.setUser.bind(this)}
 					/>
 				</div>
 				<MessageSection

@@ -6,4 +6,5 @@ I'm working on this alongside a Udemy course by James Moore (@uknowthen). After 
 
 // TODO: 
 + Accessing PropTypes via main React Package is deprecated
-+ users: creating a user should set it as the activeUser, for now the active user is whichever user name is clicked. 
++ users: refactor 'activeUser' to more appropriate 'userName'
++ more helpful comments
