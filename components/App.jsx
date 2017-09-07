@@ -21,7 +21,8 @@ class App extends Component {
 	 * the app is ready to receive event messages
 	 */
 	componentDidMount() {
-		let socket = this.socket = new Socket();
+		let ws = new WebSocket('ws://localhost:4000')
+		let socket = this.socket = new Socket(ws);
 
 		/* set the event handlers */
 		socket.on('connect', this.onConnect.bind(this));
