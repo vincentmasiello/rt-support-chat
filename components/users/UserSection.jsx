@@ -21,7 +21,7 @@ class UserSection extends Component {
 UserSection.propTypes = {
 	users: React.PropTypes.array.isRequired,
 	setUser: React.PropTypes.func.isRequired,
-	activeUser: React.PropTypes.object.isRequired,
+	activeUser: React.PropTypes.string.isRequired,
 }
 
 export default UserSection

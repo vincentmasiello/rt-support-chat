@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class User extends Component {
 	render() {
 		const {user, activeUser} = this.props;
-		const active = (user === activeUser) ? 'active' : '';
+		const active = (user.name === activeUser) ? 'active' : '';
 		return (
 			<li className={active}>
 				{user.name}
@@ -14,7 +14,7 @@ class User extends Component {
 
 User.propTypes = {
 	user: React.PropTypes.object.isRequired,
-	activeUser: React.PropTypes.object.isRequired
+	activeUser: React.PropTypes.string.isRequired
 }
 
 export default User

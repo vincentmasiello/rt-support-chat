@@ -6,7 +6,7 @@ import {EventEmitter} from 'events';
  * interface to the app
  */
 class Socket {
-	constructor(ws = new WebSocket(), ee = new EventEmitter()) {
+	constructor(ws, ee = new EventEmitter()) {
 		this.ws = ws;
 		this.ee = ee;
 
@@ -22,6 +22,7 @@ class Socket {
 		this.ee.removeListener(name, fn);
 	}
 	emit(name, data) {
+		// console.log(`${name}, ${data.name}`);
 		const message = JSON.stringify({name, data});
 		this.ws.send(message);
 	}

@@ -16,9 +16,9 @@ class App extends Component {
 
 	/*
 	 * componentDidMount() 
-	 * React lifecycle event
-	 * called ONCE after render()
-	 * the app is ready to receive event messages
+	 * 	React lifecycle event
+	 * 	called ONCE after render()
+	 * 	the app is ready to receive event messages
 	 */
 	componentDidMount() {
 		let ws = new WebSocket('ws://localhost:4000')
@@ -32,6 +32,9 @@ class App extends Component {
 		socket.on('user edit', this.onEditUser.bind(this));
 		socket.on('user remove', this.onRemoveUser.bind(this));
 		socket.on('message add', this.onAddMessage.bind(this));
+
+		/* set default user */
+		setUser("anonymous");
 	}
 
 	/********************************
@@ -39,11 +42,13 @@ class App extends Component {
 	 ********************************/
 
 	onConnect() {
+		console.log("connected");
 		this.setState({connected: true});
 		this.socket.emit('channel subscribe');
 		this.socket.emit('user subscribe');
 	}
 	onDisconnect() {
+		console.log("disconnected");
 		this.setState({connected: false});
 	}
 	onAddMessage(message) {
@@ -58,18 +63,13 @@ class App extends Component {
 	}
 	onEditUser(editUser) {
 		let {users} = this.state;
-
-		/* .map()
-		 * on each user in the array, if that user id is same id as
-		 * the one that changed, return that new one in place of the
-		 * old one.
-		 */
-			users = users.map(user => {
+		users = users.map(user => {
 			if (editUser.id === user.id) {
 				return editUser;
 			}
 			return user;
 		});
+		this.setState({users});
 	}
 	onRemoveUser(removeUser) {
 		let {users} = this.state;
@@ -113,13 +113,14 @@ class App extends Component {
 
 	/*
 	 * setUser(string name)
-	 * use socket utility to message server that a new name has 
-	 * been entered or existing name has been edited.
-	 * //TODO: handle situation where the user actually wants to 
-	 * edit their already entered name. 
+	 * 	use socket utility to message server that a new name has 
+	 * 	been entered or existing name has been edited.
+	 * TODO: best way to validate author in the case of duplicate names. 
+	 * 				i think just enforce unique names at the server level? 
 	 */
-	setUser(name) {
-		socket.emit('user edit', {name});
+	setUser(user) {
+		this.setState({activeUser: user});
+		this.socket.emit('user edit', {name});
 	}
 	
 	/*
@@ -127,10 +128,10 @@ class App extends Component {
 	 * client entered a new message, send to server through 
 	 * socket utility
 	 */
-	addMessage(message) {
+	addMessage(body) {
 		let {activeChannel} = this.state;
-		this.socket.emit('message add',
-			{channelId: activeChannel.id, body});
+		this.socket.emit('message add', 
+			{author: this.state.activeUser, body, channelId: activeChannel.id});
 	}
 
 	render() {
@@ -144,7 +145,7 @@ class App extends Component {
 					/>
 					<UserSection
 						{...this.state}
-						setUserUser={this.setUser.bind(this)}
+						setUser={this.setUser.bind(this)}
 					/>
 				</div>
 				<MessageSection
