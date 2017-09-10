@@ -37,7 +37,7 @@ class Socket {
 			 */
 			this.ee.emit(message.name, message.data);
 		} catch (err) {
-			this.ee.emit('error');
+			this.ee.emit('error', err);
 		}
 	}
 	open() {

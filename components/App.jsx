@@ -32,9 +32,6 @@ class App extends Component {
 		socket.on('user edit', this.onEditUser.bind(this));
 		socket.on('user remove', this.onRemoveUser.bind(this));
 		socket.on('message add', this.onAddMessage.bind(this));
-
-		/* set default user */
-		setUser("anonymous");
 	}
 
 	/********************************
@@ -52,7 +49,8 @@ class App extends Component {
 		this.setState({connected: false});
 	}
 	onAddMessage(message) {
-		let {messagses} = this.state;
+		console.log(message);
+		let {messages} = this.state;
 		messages.push(message);
 		this.setState({messages});
 	}

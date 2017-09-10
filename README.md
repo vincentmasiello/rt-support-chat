@@ -6,3 +6,4 @@ I'm working on this alongside a Udemy course by James Moore (@uknowthen). After 
 
 // TODO: 
 + Accessing PropTypes via main React Package is deprecated
++ highlight users own messages (think iMessage)
