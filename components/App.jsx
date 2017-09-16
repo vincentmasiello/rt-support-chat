@@ -11,6 +11,7 @@ class App extends Component {
 			channels: [],
 			users: [],
 			messages: [],
+			activeChannel: {},
 		};
 	}
 
@@ -32,6 +33,8 @@ class App extends Component {
 		socket.on('user edit', this.onEditUser.bind(this));
 		socket.on('user remove', this.onRemoveUser.bind(this));
 		socket.on('message add', this.onAddMessage.bind(this));
+
+		socket.on('console log', this.onConsoleLog.bind(this));
 	}
 
 	/********************************
@@ -49,7 +52,6 @@ class App extends Component {
 		this.setState({connected: false});
 	}
 	onAddMessage(message) {
-		console.log(message);
 		let {messages} = this.state;
 		messages.push(message);
 		this.setState({messages});
@@ -72,7 +74,6 @@ class App extends Component {
 	onRemoveUser(removeUser) {
 		let {users} = this.state;
 		users = users.filter(user => {
-			/* return false for the user to be removed, else true. neat! */
 			return user.id !== removeUser.id;
 		});
 		this.setState({users});
@@ -106,18 +107,15 @@ class App extends Component {
 		this.socket.emit('message unsubsribe');
 		this.setState({messages: []});
 		this.socket.emit('message subscribe', 
-			{channelId: activeChannel.id}); 
+			{channelId: activeChannel.id});
 	}
 
 	/*
 	 * setUser(string name)
 	 * 	use socket utility to message server that a new name has 
 	 * 	been entered or existing name has been edited.
-	 * TODO: best way to validate author in the case of duplicate names. 
-	 * 				i think just enforce unique names at the server level? 
 	 */
-	setUser(user) {
-		this.setState({activeUser: user});
+	setUser(name) {
 		this.socket.emit('user edit', {name});
 	}
 	
@@ -129,7 +127,7 @@ class App extends Component {
 	addMessage(body) {
 		let {activeChannel} = this.state;
 		this.socket.emit('message add', 
-			{author: this.state.activeUser, body, channelId: activeChannel.id});
+			{body, channelId: activeChannel.id});
 	}
 
 	render() {
