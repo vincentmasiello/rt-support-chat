@@ -22,7 +22,9 @@ ChannelSection.propTypes = {
 	channels: React.PropTypes.array.isRequired,
 	setChannel: React.PropTypes.func.isRequired,
 	addChannel: React.PropTypes.func.isRequired,
-	activeChannel: React.PropTypes.object.isRequired
+	activeChannel: React.PropTypes.object.isRequired,
+	editChannel: React.PropTypes.func.isRequired,
+	deleteChannel: React.PropTypes.func.isRequired
 }
 
 export default ChannelSection

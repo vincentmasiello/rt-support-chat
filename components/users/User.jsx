@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 
 class User extends Component {
 	render() {
-		const {user, activeUser} = this.props;
-		const active = (user.name === activeUser) ? 'active' : '';
+		const {user} = this.props;
 		return (
-			<li className={active}>
+			<li>
 				{user.name}
 			</li>
 		)
@@ -13,8 +12,7 @@ class User extends Component {
 }
 
 User.propTypes = {
-	user: React.PropTypes.object.isRequired,
-	activeUser: React.PropTypes.string.isRequired
+	user: React.PropTypes.object.isRequired
 }
 
 export default User

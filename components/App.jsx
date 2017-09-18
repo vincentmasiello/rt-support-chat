@@ -33,8 +33,6 @@ class App extends Component {
 		socket.on('user edit', this.onEditUser.bind(this));
 		socket.on('user remove', this.onRemoveUser.bind(this));
 		socket.on('message add', this.onAddMessage.bind(this));
-
-		socket.on('console log', this.onConsoleLog.bind(this));
 	}
 
 	/********************************
@@ -83,6 +81,22 @@ class App extends Component {
 		channels.push(channel);
 		this.setState({channels});
 	}
+	onEditChannel(editChannel) {
+		let {channels} = this.state;
+		channels = channels.map(channel => {
+			if (editChannel.id === channel.id) {
+				return editChannel;
+			}
+			return channel;
+		});
+	}
+	onRemoveChannel(removeChannel) {
+		let {channels} = this.state;
+		channels = channels.filter(channel => {
+			return channel.id !== removeChannel.id;
+		});
+		this.setState(channels);
+	}
 
 	/********************************
 	 * outgoing message functions 
@@ -129,6 +143,16 @@ class App extends Component {
 		this.socket.emit('message add', 
 			{body, channelId: activeChannel.id});
 	}
+	/*
+	*/
+	editChannel(channel) {
+		this.socket.emit('channel edit', channel);
+	}
+	/*
+	*/
+	deleteChannel(channel) {
+		this.socket.emit('channel delete', channel);
+	}
 
 	render() {
 		return (
@@ -138,6 +162,8 @@ class App extends Component {
 						{...this.state}
 						addChannel={this.addChannel.bind(this)}
 						setChannel={this.setChannel.bind(this)}
+						editChannel={this.editChannel.bind(this)}
+						deleteChannel={this.deleteChannel.bind(this)}
 					/>
 					<UserSection
 						{...this.state}

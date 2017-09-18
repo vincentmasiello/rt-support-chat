@@ -18,8 +18,7 @@ class UserList extends Component {
 }
 
 UserList.propTypes = {
-	users: React.PropTypes.array.isRequired,
-	activeUser: React.PropTypes.string.isRequired
+	users: React.PropTypes.array.isRequired
 }
 
 export default UserList
