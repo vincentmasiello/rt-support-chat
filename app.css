@@ -55,7 +55,10 @@
   margin-bottom: 0;
 }
 .channel-control {
-  
+
+}
+.hidden {
+  display: none !important;
 }
 ul{
   list-style-type:none;

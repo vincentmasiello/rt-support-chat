@@ -10,12 +10,15 @@ class ChannelControl extends Component {
 		} else if (control === 'edit') {
 			editChannel(channel);
 		} else {
-			console.log(e.target);
+			console.log('failure: ' + e.target);
 		}
 	}
 	render() {
+		const {channel, activeChannel} = this.props;
+		const hidden = activeChannel.id === channel.id ? '' : 'hidden';
+		const className = hidden + ' channel-control';
 		return(
-			<div className='channel-control'>
+			<div className={className}>
 				<button
 					className='btn btn-warning btn-xs'
 					type='button'

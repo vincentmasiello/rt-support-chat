@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 class Channel extends Component {
 	onClick(e) {
 		e.preventDefault();
-		const {showControls, setChannel, channel} = this.props;
+		const {setChannel, channel} = this.props;
 		setChannel(channel);
 	}
 	render() {
@@ -22,8 +22,7 @@ class Channel extends Component {
 Channel.propTypes = {
 	channel: React.PropTypes.object.isRequired,
 	setChannel: React.PropTypes.func.isRequired,
-	activeChannel: React.PropTypes.object.isRequired,
-	showControls: React.PropTypes.func.isRequired
+	activeChannel: React.PropTypes.object.isRequired
 }
 
 export default Channel

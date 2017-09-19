@@ -36,8 +36,7 @@ ChannelList.propTypes = {
 	setChannel: React.PropTypes.func.isRequired,
 	activeChannel: React.PropTypes.object.isRequired,
 	editChannel: React.PropTypes.func.isRequired,
-	deleteChannel: React.PropTypes.func.isRequired,
-	showControls: React.PropTypes.func.isRequired
+	deleteChannel: React.PropTypes.func.isRequired
 }
 
 export default ChannelList
