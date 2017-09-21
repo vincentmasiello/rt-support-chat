@@ -97,7 +97,7 @@ class App extends Component {
 		channels = channels.filter(channel => {
 			return channel.id !== removeChannel.id;
 		});
-		this.setState(channels);
+		this.setState({channels});
 	}
 
 	/********************************
