@@ -8,4 +8,4 @@ I wrote the initial app alongside a course by [James Moore](https://github.com/k
 + authentication
 
 ### issues
-+ accessing PropTypes from main React package is deprecated
++ edit channel button just sends the channel (no way to actually edit), not sure if theres a need to edit channels at all but i left it there for now.

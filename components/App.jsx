@@ -38,9 +38,6 @@ class App extends Component {
 		socket.on('message add', this.onAddMessage.bind(this));
 	}
 
-	componentWillUnmount() {
-		this.socket.emit('component unmount');
-	}
 	/********************************
 	 * incoming message callbacks 
 	 ********************************/
