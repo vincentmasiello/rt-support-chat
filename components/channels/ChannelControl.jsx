@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class ChannelControl extends Component {
 	onClick(e) {
@@ -37,9 +38,9 @@ class ChannelControl extends Component {
 }
 
 ChannelControl.propTypes = {
-	editChannel: React.PropTypes.func.isRequired,
-	deleteChannel: React.PropTypes.func.isRequired,
-	channel: React.PropTypes.object.isRequired
+	editChannel: PropTypes.func.isRequired,
+	deleteChannel: PropTypes.func.isRequired,
+	channel: PropTypes.object.isRequired
 }
 
 export default ChannelControl

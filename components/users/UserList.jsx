@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import User from './User.jsx';
 
 class UserList extends Component {
@@ -18,7 +19,7 @@ class UserList extends Component {
 }
 
 UserList.propTypes = {
-	users: React.PropTypes.array.isRequired
+	users: PropTypes.array.isRequired
 }
 
 export default UserList

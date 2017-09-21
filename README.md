@@ -1,9 +1,11 @@
-## rt-support-chat
+# rt-support-chat
+A real-time chat app written using React. The server side is in Go and can be found [here](https://github.com/vvmk/rt-support-chat-server).
 
-This is a realtime support/chat app written as an excercise in react and go. There will be support for channels, users and messages. All three sections are relatively the same.
+I wrote the initial app alongside a course by [James Moore](https://github.com/knowthen)
 
-I'm working on this alongside a Udemy course by James Moore (@uknowthen). After coding the channels section the course challenges students to write the users & messages sections completely on their own.
+### planned features: 
++ private messages
++ authentication
 
-// TODO: 
-+ Accessing PropTypes via main React Package is deprecated
-+ highlight users own messages (think iMessage)
+### issues
++ accessing PropTypes from main React package is deprecated

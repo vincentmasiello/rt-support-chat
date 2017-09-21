@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import ChannelSection from './channels/ChannelSection.jsx';
 import UserSection from './users/UserSection.jsx';
 import MessageSection from './messages/MessageSection.jsx';
@@ -37,6 +38,9 @@ class App extends Component {
 		socket.on('message add', this.onAddMessage.bind(this));
 	}
 
+	componentWillUnmount() {
+		this.socket.emit('component unmount');
+	}
 	/********************************
 	 * incoming message callbacks 
 	 ********************************/

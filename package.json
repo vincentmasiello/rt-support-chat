@@ -17,6 +17,7 @@
     "webpack": "^3.5.5"
   },
   "dependencies": {
-    "babel-core": "^6.26.0"
+    "babel-core": "^6.26.0",
+    "prop-types": "^15.5.10"
   }
 }

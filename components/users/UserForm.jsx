@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 class UserForm extends Component {
 	onSubmit(e) {
@@ -25,7 +26,7 @@ class UserForm extends Component {
 }
 
 UserForm.propTypes = {
-	setUser: React.PropTypes.func.isRequired
+	setUser: PropTypes.func.isRequired
 }
 
 export default UserForm
